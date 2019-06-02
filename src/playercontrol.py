@@ -15,22 +15,16 @@ class PlayerControl:
 
 
 	def goLeft(self):
-		#if (self.gameOver()): return
-
 		self.selectIfUnselected()
 		if (self.currentNode != None and self.currentNode.left != None):
 			self.currentNode = self.currentNode.left
 
 	def goRight(self):
-		#if (self.gameOver()): return
-		
 		self.selectIfUnselected()
 		if (self.currentNode != None and self.currentNode.right != None):
 			self.currentNode = self.currentNode.right
 
 	def goUp(self):
-		#if (self.gameOver()): return
-		
 		self.selectIfUnselected()
 		if (self.currentNode != None and self.currentNode.parent != None):
 			self.currentNode = self.currentNode.parent

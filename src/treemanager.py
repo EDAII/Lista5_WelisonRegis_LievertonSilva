@@ -1,4 +1,5 @@
 import gameglobals
+import time
 
 class AnimationTimer:
 
@@ -72,6 +73,7 @@ class EdgeLine:
 			self.toTargetPosition[i] = self.toNode.position[i]
 
 
+
 class NodeCircle:
 
 	def __init__(self, position, size, animationTimer, index):
@@ -134,7 +136,6 @@ class Tree:
 			nodeCircle.update()
 		for edgeLine in self.edgeLines:
 			edgeLine.update()
-		#self.printInOrder()
 
 	def valueOf(self, nodeCircle):
 		return self.treeNodes[nodeCircle.index].data
@@ -149,6 +150,7 @@ class Tree:
 		edgeLine = EdgeLine(fromNode.position, self.animationTimer, fromNode, toNode)
 		toNode.assignParentEdge(edgeLine)
 		self.edgeLines.append(edgeLine)
+
 
 	def createNewNode(self, data, parent, left, right):
 		index = len(self.treeNodes)
@@ -233,15 +235,18 @@ class Tree:
 			self.reassignData(node, successor.data)
 			self.removeByIndex(successor.index)
 
+
 	def inorderSuccessor(self, node):
 		current = node.right
 		while current.left != None:
 			current = current.left
 		return current
 
+
 	def reassignData(self, node, data):
 		node.data = data
 		self.nodeCircles[node.index].renderedText = None
+
 
 	def add(self, data):
 		if (self.root == None):
@@ -249,7 +254,6 @@ class Tree:
 		else:
 			self.root = self.addRecursive(None, self.root, data)
 		self.generatePositions()
-		#self.printInOrder()
 
 	def addRecursive(self, parent, node, data):
 		if (node == None):
@@ -265,6 +269,7 @@ class Tree:
 			return node
 		else:
 			return node
+
 
 	def rotateRight(self, node):
 		if (node.left == None):
@@ -323,6 +328,7 @@ class Tree:
 		node.right = node.right.left
 		node.parent.left = node
 		self.generatePositions()
+
 
 	def printInOrder(self):
 		output = self.inOrderToString(self.root)
@@ -424,3 +430,4 @@ def initialise():
 
 def update():
 	gameglobals.tree.update()
+

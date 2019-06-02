@@ -35,7 +35,7 @@ class GameStats:
 
 	def exitGame(self):
 		self.gameExited = True
-		
+
 
 #Carries add / delete operations.
 class OperationQueue:
@@ -96,7 +96,7 @@ class OperationController:
 		self.nextUnusedNumber = size
 		self.state = 0
 
-	def maybeChangeSpawnRate(self): 
+	def maybeChangeSpawnRate(self): # used by start mode
 		if self.state == 0:
 			self.state = 1
 			gameglobals.gameStats.accelerateSpawn(1.4)
@@ -175,7 +175,7 @@ class OperationController:
 
 
 	def initialiseOpSequence(self, size):
-		opSequence = [] #True = add, False = delete
+		opSequence = [] 
 		insertions = 0
 		deletions = 0
 		for i in range(0,size*2):
@@ -236,7 +236,7 @@ def updateSpawningstart():
 			winGame()
 
 
-def initialisestart(rate, size):
+def initialiseStart(rate, size):
 	global controllerUpdate
 	gameglobals.gameStats = GameStats(rate)
 	gameglobals.controller = OperationController(size)

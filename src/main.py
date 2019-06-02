@@ -41,7 +41,7 @@ def initialiseGame(args, mode):
 	cameracontrols.initialise()
 
 	if mode == 0:
-		gamecontrol.initialisestart(args[0], args[1])
+		gamecontrol.initialiseStart(args[0], args[1])
 	elif mode == 1:
 		gamecontrol.initialiseTutorial()
 		draw.initialiseTutorial()

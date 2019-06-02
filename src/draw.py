@@ -73,8 +73,25 @@ def initialise():
 	LINE_COLOUR = 255, 255, 255
 
 
+def gameOverColours():
+	global normalColours
+	if not normalColours:
+		return
+
+	global LINE_COLOUR, HPBAR_BACK
+	global HPBAR_FRONT
+	global graphics
+
+	graphics.gameOver(gameglobals.gameStats.victory)
+
+	normalColours = False
+	LINE_COLOUR = 127, 127, 127
+
+
 def drawGameFrame():
 	screen = gameglobals.screen
+	if gameglobals.gameStats.gameOver:
+		gameOverColours()
 
 	screen.fill(BACKGROUND_COLOUR)
 
@@ -84,6 +101,7 @@ def drawGameFrame():
 	screen.blit(graphics.background, bgPosition)
 
 	drawGameScene()
+	# drawUI()
 	drawGameOverMessage()
 	drawOther()
 
@@ -125,6 +143,7 @@ def drawGameScene():
 		else:
 			image = graphics.node_unselected
 		screen.blit(image, circlePos)
+		#pygame.draw.circle(screen, colour, position, nodeCircle.radius)
 
 		if (nodeCircle.renderedText == None):
 			nodeCircle.renderedText = font.render(
