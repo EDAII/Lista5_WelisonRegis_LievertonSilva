@@ -1,6 +1,5 @@
 import gameglobals
 
-
 class AnimationTimer:
 
 	def __init__(self):
@@ -30,7 +29,7 @@ class EdgeLine:
 		self.toNode = toNode
 
 	def update(self):
-		for i in range(0, 2):
+		for i in range (0,2):
 			diff = self.fromTargetPosition[i] - self.fromOriginalPosition[i]
 			diff *= self.animationTimer.frame
 			diff //= self.animationTimer.maxFrame
@@ -40,6 +39,7 @@ class EdgeLine:
 			diff *= self.animationTimer.frame
 			diff //= self.animationTimer.maxFrame
 			self.toPosition[i] = self.toOriginalPosition[i] + diff
+
 
 	def reverse(self):
 		temp = self.fromPosition
@@ -65,7 +65,7 @@ class EdgeLine:
 		self.toNode = newNode
 
 	def reposition(self):
-		for i in range(0, 2):
+		for i in range (0,2):
 			self.fromOriginalPosition[i] = self.fromPosition[i]
 			self.fromTargetPosition[i] = self.fromNode.position[i]
 			self.toOriginalPosition[i] = self.toPosition[i]
@@ -85,14 +85,14 @@ class NodeCircle:
 		self.renderedBalance = None
 
 	def update(self):
-		for i in range(0, 2):
+		for i in range (0,2):
 			diff = self.targetPosition[i] - self.originalPosition[i]
 			diff *= self.animationTimer.frame
 			diff //= self.animationTimer.maxFrame
 			self.position[i] = self.originalPosition[i] + diff
 
 	def relocate(self, targetPosition):
-		for i in range(0, 2):
+		for i in range (0,2):
 			self.originalPosition[i] = self.position[i]
 			self.targetPosition[i] = targetPosition[i]
 
@@ -105,7 +105,7 @@ class TreeNode:
 		self.left = left
 		self.right = right
 		self.index = index
-		self.position = [0, 0]
+		self.position = [0,0]
 		self.treeWidth = 0
 		self.parentEdge = None
 		self.balance = 0
@@ -138,7 +138,7 @@ class Tree:
 
 	def valueOf(self, nodeCircle):
 		return self.treeNodes[nodeCircle.index].data
-
+	
 	def balanceOf(self, nodeCircle):
 		return self.treeNodes[nodeCircle.index].balance
 
@@ -153,13 +153,12 @@ class Tree:
 	def createNewNode(self, data, parent, left, right):
 		index = len(self.treeNodes)
 		if (parent == None):
-			position = [0, 0]
+			position = [0,0]
 		else:
 			position = parent.position
 
 		node = TreeNode(data, parent, left, right, index)
-		nodeCircle = NodeCircle(position, self.circleSize,
-		                        self.animationTimer, index)
+		nodeCircle = NodeCircle(position, self.circleSize, self.animationTimer, index)
 
 		self.treeNodes.append(node)
 		self.nodeCircles.append(nodeCircle)
@@ -167,7 +166,7 @@ class Tree:
 		return node
 
 	def indexOf(self, data):
-		for i in range(0, len(self.treeNodes)):
+		for i in range (0,len(self.treeNodes)):
 			if self.treeNodes[i].data == data:
 				return i
 		return None
@@ -193,7 +192,7 @@ class Tree:
 
 	def removeByIndex(self, index):
 		node = self.treeNodes[index]
-		if node.left == None:  # no left child
+		if node.left == None: # no left child
 			if node == self.root:
 				self.root = node.right
 			else:
@@ -203,7 +202,7 @@ class Tree:
 					node.parent.left = node.right
 				self.edgeLines.remove(node.parentEdge)
 
-			if node.right != None:  # has right child
+			if node.right != None: # has right child
 				node.right.parent = node.parent
 				if (node.parent == None):
 					self.edgeLines.remove(node.right.parentEdge)
@@ -211,7 +210,7 @@ class Tree:
 					node.right.parentEdge.switchFromNode(node.parent)
 			self.indexRemove(index)
 
-		elif node.right == None:  # no right child
+		elif node.right == None: # no right child
 			if node == self.root:
 				self.root = node.left
 			else:
@@ -229,7 +228,7 @@ class Tree:
 				node.left.parentEdge.switchFromNode(node.parent)
 			self.indexRemove(index)
 
-		else:  # two children
+		else: # two children
 			successor = self.inorderSuccessor(node)
 			self.reassignData(node, successor.data)
 			self.removeByIndex(successor.index)
@@ -281,12 +280,12 @@ class Tree:
 			parentEdge.switchToNode(node.left)
 			if (node.parent.left == node):
 				node.parent.left = node.left
-			else:  # node.parent.right == node
+			else: #node.parent.right == node
 				node.parent.right = node.left
-
+			
 		node.left.parent = node.parent
 		node.left.parentEdge = parentEdge
-
+		
 		if (node.left.right != None):
 			node.left.right.parentEdge.switchFromNode(node)
 			node.left.right.parent = node
@@ -310,12 +309,12 @@ class Tree:
 			parentEdge.switchToNode(node.right)
 			if (node.parent.right == node):
 				node.parent.right = node.right
-			else:  # node.parent.left == node
+			else: #node.parent.left == node
 				node.parent.left = node.right
-
+			
 		node.right.parent = node.parent
 		node.right.parentEdge = parentEdge
-
+		
 		if (node.right.left != None):
 			node.right.left.parentEdge.switchFromNode(node)
 			node.right.left.parent = node
@@ -334,19 +333,17 @@ class Tree:
 			return ""
 		else:
 			return self.inOrderToString(node.left) + " " + \
-                            str(self.nodeCircles[node.index].targetPosition) + \
-                            " " + self.inOrderToString(node.right)
+				str(self.nodeCircles[node.index].targetPosition) + " " + self.inOrderToString(node.right) 
 
 	def recomputeBalancesUpdateHeight(self):
 		self.height = self.computeBalanceReturnHeight(self.root)
 
 	def computeBalanceReturnHeight(self, node):
-		if (node == None):
-			return 0
+		if (node == None): return 0
 		leftHeight = self.computeBalanceReturnHeight(node.left)
 		rightHeight = self.computeBalanceReturnHeight(node.right)
 		self.updateBalance(node, rightHeight - leftHeight)
-
+		
 		return 1 + max(leftHeight, rightHeight)
 
 	def updateBalance(self, node, newBalance):
@@ -355,8 +352,7 @@ class Tree:
 			self.nodeCircles[node.index].renderedBalance = None
 
 	def generateTreeWidth(self, node):
-		if (node == None):
-			return self.halfCircleWidth
+		if (node == None): return self.halfCircleWidth
 
 		node.treeWidth = self.middleWidth + \
 			self.generateTreeWidth(node.left) + self.generateTreeWidth(node.right)
@@ -364,8 +360,7 @@ class Tree:
 		return node.treeWidth
 
 	def generatePositionLeft(self, node, parent):
-		if (node == None):
-			return
+		if (node == None): return
 
 		distance = self.middleWidth
 		if (node.right == None):
@@ -377,21 +372,19 @@ class Tree:
 		node.position[1] = parent.position[1] + self.yDisplacement
 
 	def generatePositionRight(self, node, parent):
-		if (node == None):
-			return
+		if (node == None): return
 
 		distance = self.middleWidth
 		if (node.left == None):
 			distance += self.halfCircleWidth
 		else:
 			distance += node.left.treeWidth
-
+			
 		node.position[0] = parent.position[0] + distance
 		node.position[1] = parent.position[1] + self.yDisplacement
 
 	def generatePositionsRecurse(self, node):
-		if (node == None):
-			return
+		if (node == None): return
 
 		self.generatePositionLeft(node.left, node)
 		self.generatePositionRight(node.right, node)
@@ -399,36 +392,30 @@ class Tree:
 		self.generatePositionsRecurse(node.right)
 
 	def generatePositions(self):
-		if self.root == None:
-			return
+		if self.root == None: return
 		self.recomputeBalancesUpdateHeight()
 		self.generateTreeWidth(self.root)
-		self.root.position = [0, 0]
+		self.root.position = [0,0]
 		self.generatePositionsRecurse(self.root)
 		self.updatePositions()
 
 	def updatePositions(self):
 		self.animationTimer.reset()
-		for i in range(0, len(self.treeNodes)):
+		for i in range (0,len(self.treeNodes)):
 			self.nodeCircles[i].relocate(self.treeNodes[i].position)
 		for edgeLine in self.edgeLines:
 			edgeLine.reposition()
 
 	def imbalance(self, node):
 		absBalance = abs(node.balance)
-		if absBalance < 2:
-			return 0
-		else:
-			return 0.7 * ((absBalance-1)**1.1)
-		#Chart:
-		# 0   1   2   3   4   5   6
-		# 0   0  0.7 1.5 2.3 3.2 4.1
+		return absBalance 
 
 	def totalImbalance(self):
-		total = 0
+		maxImbalance = 0
 		for node in self.treeNodes:
-			total += self.imbalance(node)
-		return total
+			if self.imbalance(node) > maxImbalance:
+				maxImbalance = self.imbalance(node)
+		return maxImbalance
 
 
 def initialise():

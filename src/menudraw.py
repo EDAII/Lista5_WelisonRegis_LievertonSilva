@@ -1,6 +1,6 @@
+import gameglobals
 import pygame
 import pygame.font
-import gameglobals
 pygame.font.init()
 
 BACKGROUND_COLOUR = 0, 0, 0
@@ -18,7 +18,7 @@ font = pygame.font.SysFont(None, 32)
 class MenuGraphics:
 
 	def __init__(self):
-		self.background = pygame.image.load("../img/menu.png")
+		self.background = pygame.image.load("../img/menubg.png")
 
 
 graphics = None
@@ -51,6 +51,8 @@ def drawMenu_main(screen, selection, renders):
 	drawButton(screen, "START", 0, renders, selection)
 	drawButton(screen, "TUTORIAL", 1, renders, selection)
 
+
+#returns [centerPosition, text]
 def generateButton(message, index, renders):
 	if renders[index] == None:
 		renders[index] = font.render(message, True, WHITE)
@@ -64,6 +66,7 @@ def generateButton(message, index, renders):
 	return ([x, y], renders[index])
 
 
+#generatedButton is [centerPosition, text]
 def drawButton(screen, message, index, renders, selection):
 	buttonStats = generateButton(message, index, renders)
 	centerPosition = buttonStats[0]
