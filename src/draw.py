@@ -7,16 +7,16 @@ pygame.font.init()
 class Graphics:
 
 	def __init__(self):
-		self.background = pygame.image.load("../img/background.png")
+		self.background = pygame.image.load("img/background.png")
 		bgRect = self.background.get_rect()
 		self.bgHalfSize = [bgRect[2]//2, bgRect[3]//2]
 
-		self.node_unselected = pygame.image.load("../img/node.png")
-		self.node_selected = pygame.image.load("../img/nodeSelected.png")
+		self.node_unselected = pygame.image.load("img/node.png")
+		self.node_selected = pygame.image.load("img/nodeSelected.png")
 		nodeRect = self.node_selected.get_rect()
 		self.nodeHalfSize = nodeRect[2]//2
 
-		self.nodeGlow = pygame.image.load("../img/nodeglow.png")
+		self.nodeGlow = pygame.image.load("img/nodeglow.png")
 		nodeGlowRect = self.nodeGlow.get_rect()
 		self.nodeGlowHalfSize = nodeGlowRect[2]//2
 
@@ -32,9 +32,9 @@ class Graphics:
 
 	def gameOver(self, isVictory):
 		if isVictory:
-			self.gameOverMessage = pygame.image.load("../img/win.png")
+			self.gameOverMessage = pygame.image.load("img/win.png")
 		else:
-			self.gameOverMessage = pygame.image.load("../img/lose.png")
+			self.gameOverMessage = pygame.image.load("img/lose.png")
 
 		messageRect = self.gameOverMessage.get_rect()
 		self.messageHalfSize = [messageRect[2]//2, messageRect[3]//2]

@@ -18,7 +18,7 @@ font = pygame.font.SysFont(None, 32)
 class MenuGraphics:
 
 	def __init__(self):
-		self.background = pygame.image.load("../img/background.png")
+		self.background = pygame.image.load("img/background.png")
 
 
 graphics = None
