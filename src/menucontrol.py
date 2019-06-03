@@ -28,12 +28,7 @@ class MenuVars:
 		operations = self.generateEmptyArray()
 
 		operations[0][0] = lambda: start_start(60, 20)
-		operations[0][1] = lambda: start_tutorial()
-
-		# operations[1][0] = lambda : start_start(90, 20)
-		# operations[1][1] = lambda : start_start(80, 30)
-		# operations[1][2] = lambda : start_start(70, 40)
-		# operations[1][3] = lambda : start_start(60, 80)
+		operations[0][1] = None
 
 		return operations
 

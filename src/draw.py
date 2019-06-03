@@ -7,7 +7,7 @@ pygame.font.init()
 class Graphics:
 
 	def __init__(self):
-		self.background = pygame.image.load("../img/bggraphic.png")
+		self.background = pygame.image.load("../img/background.png")
 		bgRect = self.background.get_rect()
 		self.bgHalfSize = [bgRect[2]//2, bgRect[3]//2]
 
@@ -32,9 +32,9 @@ class Graphics:
 
 	def gameOver(self, isVictory):
 		if isVictory:
-			self.gameOverMessage = pygame.image.load("../img/victory.png")
+			self.gameOverMessage = pygame.image.load("../img/win.png")
 		else:
-			self.gameOverMessage = pygame.image.load("../img/defeat.png")
+			self.gameOverMessage = pygame.image.load("../img/lose.png")
 
 		messageRect = self.gameOverMessage.get_rect()
 		self.messageHalfSize = [messageRect[2]//2, messageRect[3]//2]
