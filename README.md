@@ -6,7 +6,7 @@ Lieverton Santos Silva - 2019.1
 
 ## PROPOSTA
 
-- Desenvolve-se um jogo através da biblioteca **pygame** sobre árvores AVLs.
+- Desenvolveu-se um jogo através da biblioteca **pygame** sobre árvores AVLs.
 - O jogador tem por objetivo manter uma árvore balanceada conforme as exigências das árvores AVLs.
 
 

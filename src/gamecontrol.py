@@ -37,7 +37,6 @@ class GameStats:
 		self.gameExited = True
 
 
-#Carries add / delete operations.
 class OperationQueue:
 	nextFewSize = 10
 
@@ -96,7 +95,7 @@ class OperationController:
 		self.nextUnusedNumber = size
 		self.state = 0
 
-	def maybeChangeSpawnRate(self): # used by start mode
+	def maybeChangeSpawnRate(self):
 		if self.state == 0:
 			self.state = 1
 			gameglobals.gameStats.accelerateSpawn(1.4)
@@ -110,14 +109,13 @@ class OperationController:
 				self.state = 3
 
 	def expandQueue(self):
-		#Expand (size x2)
 		queuedOperations = self.queue.getOperationsFromSplitPoint()
 		pendingInserts = []
 		pendingDeletes = []
 		for operation in queuedOperations:
-			if operation[1] == True: # insert
+			if operation[1] == True:
 				pendingInserts.append(operation[0])
-			else: # delete
+			else:
 				if operation[0] not in pendingInserts:
 					pendingDeletes.append(operation[0])
 
@@ -138,13 +136,11 @@ class OperationController:
 		index = 0
 		for i in range(0,len(opSequence)):
 			if opSequence[i] == True:
-				#insertion
 				operations.append([pendingInserts[index], True])
 				insertedList.append(pendingInserts[index])
 				insertedList.sort()
 				index += 1
 			else:
-				#deletion
 				rangeMax = max(len(insertedList)//3, 1)
 				deleteValue = insertedList.pop(random.randrange(rangeMax))
 				operations.append([deleteValue, False])
@@ -162,12 +158,10 @@ class OperationController:
 		index = 0
 		for i in range(0,size*2):
 			if (opSequence[i] == True):
-				#insertion
 				queue.enqueue(numbers[index], True)
 				insertedList.append(numbers[index])
 				index += 1
 			else:
-				#deletion
 				deleteValue = insertedList.pop(random.randrange(len(insertedList)))
 				queue.enqueue(deleteValue, False)
 
@@ -228,9 +222,9 @@ def updateSpawningstart():
 		operation = gameglobals.controller.queue.popNext()
 		gameglobals.controller.maybeChangeSpawnRate()
 		if (operation != None):
-			if (operation[1] == True): # add
+			if (operation[1] == True):
 				gameglobals.tree.add(operation[0])
-			else: # delete
+			else:
 				gameglobals.tree.remove(operation[0])
 		else:
 			winGame()
@@ -241,3 +235,11 @@ def initialiseStart(rate, size):
 	gameglobals.gameStats = GameStats(rate)
 	gameglobals.controller = OperationController(size)
 	controllerUpdate = lambda : update_start()
+
+
+updateTutorial = lambda : True
+
+def initialiseTutorial():
+	global controllerUpdate
+	gameglobals.gameStats = GameStats(1)
+	controllerUpdate = lambda : updateTutorial()

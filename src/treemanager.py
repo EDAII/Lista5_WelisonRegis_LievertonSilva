@@ -100,7 +100,6 @@ class NodeCircle:
 
 
 class TreeNode:
-	#parent, left, right, NodeCircle
 	def __init__(self, data, parent, left, right, index):
 		self.data = data
 		self.parent = parent
@@ -194,7 +193,7 @@ class Tree:
 
 	def removeByIndex(self, index):
 		node = self.treeNodes[index]
-		if node.left == None: # no left child
+		if node.left == None: 
 			if node == self.root:
 				self.root = node.right
 			else:
@@ -204,7 +203,7 @@ class Tree:
 					node.parent.left = node.right
 				self.edgeLines.remove(node.parentEdge)
 
-			if node.right != None: # has right child
+			if node.right != None: 
 				node.right.parent = node.parent
 				if (node.parent == None):
 					self.edgeLines.remove(node.right.parentEdge)
@@ -212,7 +211,7 @@ class Tree:
 					node.right.parentEdge.switchFromNode(node.parent)
 			self.indexRemove(index)
 
-		elif node.right == None: # no right child
+		elif node.right == None:
 			if node == self.root:
 				self.root = node.left
 			else:
@@ -222,7 +221,6 @@ class Tree:
 					node.parent.left = node.left
 				self.edgeLines.remove(node.parentEdge)
 
-			# has left child
 			node.left.parent = node.parent
 			if (node.parent == None):
 				self.edgeLines.remove(node.left.parentEdge)
@@ -230,7 +228,7 @@ class Tree:
 				node.left.parentEdge.switchFromNode(node.parent)
 			self.indexRemove(index)
 
-		else: # two children
+		else: 
 			successor = self.inorderSuccessor(node)
 			self.reassignData(node, successor.data)
 			self.removeByIndex(successor.index)
@@ -285,7 +283,7 @@ class Tree:
 			parentEdge.switchToNode(node.left)
 			if (node.parent.left == node):
 				node.parent.left = node.left
-			else: #node.parent.right == node
+			else: 
 				node.parent.right = node.left
 			
 		node.left.parent = node.parent
@@ -314,7 +312,7 @@ class Tree:
 			parentEdge.switchToNode(node.right)
 			if (node.parent.right == node):
 				node.parent.right = node.right
-			else: #node.parent.left == node
+			else:
 				node.parent.left = node.right
 			
 		node.right.parent = node.parent

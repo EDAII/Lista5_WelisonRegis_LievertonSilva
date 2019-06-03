@@ -30,6 +30,8 @@ class Graphics:
 
 		self.nextText = None
 
+	def initialiseTutorialImage(self):
+		self.tutorialImage = pygame.image.load(os.path.join("img", "tutorial.png"))
 
 	def gameOver(self, isVictory):
 		if isVictory:
@@ -50,14 +52,14 @@ statsFont = pygame.font.SysFont(None, 20)
 opsFont = pygame.font.SysFont(None, 22)
 
 
-def drawOther(): return None
+drawOther = lambda : None
 
 
 def uninitialise():
 	global graphics, drawOther
 	graphics = None
 	normalColours = False
-	def drawOther(): return None
+	drawOther = lambda : None
 
 
 def initialise():
@@ -102,7 +104,6 @@ def drawGameFrame():
 	screen.blit(graphics.background, bgPosition)
 
 	drawGameScene()
-	# drawUI()
 	drawGameOverMessage()
 	drawOther()
 
@@ -144,7 +145,6 @@ def drawGameScene():
 		else:
 			image = graphics.node_unselected
 		screen.blit(image, circlePos)
-		#pygame.draw.circle(screen, colour, position, nodeCircle.radius)
 
 		if (nodeCircle.renderedText == None):
 			nodeCircle.renderedText = font.render(
@@ -169,3 +169,22 @@ def drawGameOverMessage():
 	position = [size[0]//2 - graphics.messageHalfSize[0],
              size[1]//2 - graphics.messageHalfSize[1]]
 	screen.blit(graphics.gameOverMessage, position)
+
+def it():
+	global normalColours, graphics
+	global BACKGROUND_COLOUR
+	normalColours = True
+	BACKGROUND_COLOUR = 0, 0, 0
+	graphics = Graphics()
+
+def initialiseTutorial():
+	global drawOther
+	drawOther = lambda : drawTutorial()
+	graphics.initialiseTutorialImage()
+
+
+def drawTutorial():
+	global graphics
+	screen = gameglobals.screen
+	position = [0, 0]
+	screen.blit(graphics.tutorialImage, position)

@@ -54,7 +54,6 @@ def drawMenu_main(screen, selection, renders):
 	drawButton(screen, "TUTORIAL", 1, renders, selection)
 
 
-#returns [centerPosition, text]
 def generateButton(message, index, renders):
 	if renders[index] == None:
 		renders[index] = font.render(message, True, WHITE)
@@ -68,7 +67,6 @@ def generateButton(message, index, renders):
 	return ([x, y], renders[index])
 
 
-#generatedButton is [centerPosition, text]
 def drawButton(screen, message, index, renders, selection):
 	buttonStats = generateButton(message, index, renders)
 	centerPosition = buttonStats[0]

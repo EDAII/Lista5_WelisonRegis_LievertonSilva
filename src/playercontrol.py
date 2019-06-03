@@ -8,7 +8,7 @@ class PlayerControl:
 	def selectIfUnselected(self):
 		if self.currentNode != None:
 			return
-		self.currentNode = gameglobals.tree.root #can possibly be None
+		self.currentNode = gameglobals.tree.root 
 
 	def gameOver(self):
 		return gameglobals.gameStats.gameOver
